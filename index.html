@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet Web Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <style>
+        #map {
+            width : 1900px; 
+            height: 900px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map',{
+            center: [-7.79558, 110.36949],
+            zoom: 12
+        });
+        L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png',{
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var marker = L.marker([-7.913375129951589, 110.37092092627582]).bindPopup('Rumah Hapsari').addTo(map);
+
+        var marker = L.marker([-7.766126527986148, 110.37399507658957]).bindPopup('Fakultas Teknik UGM').addTo(map);
+
+        L.Routing.control({
+            waypoints: [
+                L.latLng(-7.913375129951589, 110.37092092627582),  // Titik Awal
+                L.latLng(-7.766126527986148, 110.37399507658957)   // Titik Tujuan
+            ],
+            routeWhileDragging: true,
+            createMarker: function() { return null; }
+        }).addTo(map);
+
+    </script>
+</body>
+</html>
